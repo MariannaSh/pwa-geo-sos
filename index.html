@@ -15,6 +15,7 @@
       display: flex;
       justify-content: center;
       align-items: center;
+      flex-direction: column;
     }
     .card {
       background: rgba(255, 255, 255, 0.2);
@@ -23,7 +24,24 @@
       border-radius: 15px;
       box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
     }
+    .install-btn {
+      position: fixed;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      padding: 10px 20px;
+      background-color: #007bff;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      font-size: 16px;
+      display: none;
+    }
+    .install-btn:hover {
+      background-color: #0056b3;
+    }
   </style>
+</head>
 <body class="fullscreen">
   <div class="container text-center">
     <div class="card">
@@ -36,13 +54,26 @@
     </div>
   </div>
 
+  <button id="installBtn" class="install-btn">Install PWA</button>
+
+  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
   <script>
-    if ("serviceWorker" in navigator) {
-      navigator.serviceWorker.register("/sw.js")
-        .then(() => console.log("Service Worker zarejestrowany"))
-        .catch((error) => console.log("Błąd rejestracji SW:", error));
-    }
+    let deferredPrompt;
+
+    window.addEventListener('beforeinstallprompt', (e) => {
+      e.preventDefault();
+      deferredPrompt = e;
+      const installBtn = document.getElementById('installBtn');
+      installBtn.style.display = 'block';
+
+      installBtn.addEventListener('click', () => {
+        deferredPrompt.prompt();
+        deferredPrompt.userChoice.then((choiceResult) => {
+          console.log(choiceResult.outcome);
+          deferredPrompt = null;
+        });
+      });
+    });
   </script>
 </body>
 </html>
-
