@@ -12,6 +12,12 @@
       height: 80vh;
       width: 100%;
     }
+    .btn-bottom {
+        position: absolute;
+        bottom: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+      }
   </style>
 </head>
 <body class="p-3">
@@ -19,6 +25,8 @@
     <h2 class="text-center mb-3">Twoja aktualna lokalizacja</h2>
     <div id="map"></div>
   </div>
+
+  <a href="index.html" class="btn btn-secondary btn-bottom">Powrót</a>
 
   <script>
     if ("geolocation" in navigator) {
