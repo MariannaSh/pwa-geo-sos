@@ -35,6 +35,14 @@
       </div>
     </div>
   </div>
+
+  <script>
+    if ("serviceWorker" in navigator) {
+      navigator.serviceWorker.register("/sw.js")
+        .then(() => console.log("Service Worker zarejestrowany"))
+        .catch((error) => console.log("Błąd rejestracji SW:", error));
+    }
+  </script>
 </body>
 </html>
 
