@@ -23,15 +23,13 @@
     <a href="index.html" class="btn btn-secondary btn-bottom">Powrót</a>
 
     <script>
-        if ('serviceWorker' in navigator) {
-            navigator.serviceWorker.register('sw.js');
+        function sosAlert() {
+          if ('vibrate' in navigator) {
+            navigator.vibrate([200, 100, 200, 100, 200, 300, 400, 300, 200, 100, 200]);
+          } else {
+            alert("Twoje urządzenie nie obsługuje wibracji.");
+          }
         }
-
-        function sos() {
-            if (navigator.vibrate) {
-                navigator.vibrate([300, 300, 300, 600, 600, 600, 300, 300, 300]);
-            }
-        }
-    </script>
+      </script>
 </body>
 </html>
