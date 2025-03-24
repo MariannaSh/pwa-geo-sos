@@ -2,10 +2,10 @@ self.addEventListener('install', event => {
     event.waitUntil(
         caches.open('pwa-cache').then(cache => {
             return cache.addAll([
-                'index.html',
-                'map.html',
-                'manifest.json',
-                'sw.js'
+                '/index.html',
+                '/map.html',
+                '/manifest.json',
+                '/sw.js'
             ]);
         })
     );
